@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <title>Solarum [Prototype]</title>
+
+    <!-- Bootstrap CSS & Js -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Howler.js (Audio Library) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+        integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Main.js & Other JS -->
+    <script src="js/main.js" type="module"></script>
+
+    <!-- Chance.js (Randomization Library) -->
+    <script src="js/chance.min.js"></script>
+
+    <!-- Font Awesome (Local) -->
+    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    </link>
+
+    <!-- Inter UI Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-dice-d20"></i> Solarum</a>
+            <a style="margin-left: -1em;" id="version_number" class="navbar-brand">v.0.0.1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul id="main_navbar_container" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button id="test_button" type="button" class="btn btn-primary">Primary</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="game_settings_button" type="button" class="btn btn-primary">Settings <i
+                                class="fa-solid fa-gears"></i></button>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <a class="social_icon" id="twitter_icon" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a>
+                <a class="social_icon" id="github_icon" href="#"><i class="fa-brands fa-2x fa-square-github"></i></a>
+                <button id="dark_mode_toggle" type="button" class="btn btn-primary"><i
+                        class="fa-solid fa-moon"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div style="width: 25em; margin-top: 3em;" id="main_menu_container" class="container text-center">
+        <div class="row">
+            <div class="col">
+                <h1> <i class="fa-solid fa-dice-d20"></i> Solarum <i class="fa-solid fa-dice-d20"></i></h1>
+                <p id="version_number" style="margin-top: -0.5em;">v.0.0.1</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><button id="continue_button" type="button" class="btn btn-primary"
+                            disabled>Continue</button></li>
+                    <li class="list-group-item"><button id="new_game_button" type="button" class="btn btn-primary">New
+                            Game</button></li>
+                    <li class="list-group-item"><button id="load_game_button" type="button" class="btn btn-primary"
+                            disabled>Load Game</button></li>
+                    <li style="margin-top: 5em;" class="list-group-item">Studio Blackbook | 2023</li>
+                </ul>
+
+
+            </div>
+        </div>
+        <a style="display: inline;" class="social_icon" id="twitter_icon" href="#"><i
+                class="fa-brands fa-2x fa-twitter"></i></a>
+        <a class="social_icon" id="github_icon" href="#"><i class="fa-brands fa-2x fa-square-github"></i></a>
+    </div>
+
+    <div style="margin-top: 3em;" id="new_character_container" class="container" hidden>
+        <h5>Character Creation</h5>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <p>Character Info <i class="fa-solid fa-user"></i></p>
+                <hr>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-duotone fa-signature"></i></span>
+                    <input id="input_player_name" type="text" class="form-control" placeholder="Player Name"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+
+                <ul class="list-group">
+                    <p>Game Modes</p>
+                    <li class="list-group-item">
+                      <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="input_gamemode_standard_radio" checked>
+                      <label id="input_gamemode_standard" class="form-check-label stretched-link" for="input_gamemode_standard_radio">Standard</label>
+                    </li>
+                    <li class="list-group-item">
+                      <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="input_gamemode_hardcore_radio" disabled>
+                      <label id="input_gamemode_hardcore" class="form-check-label stretched-link" for="input_gamemode_hardcore_radio">Hardcore</label>
+                    </li>
+                  </ul>
+                  <div style="margin-top: 1em;">
+                  <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                  <label class="form-check-label" for="thirdCheckbox">Survival Mode</label>
+                  </div>
+            </div>
+            <div class="col">
+                <p>Class <i class="fa-solid fa-swords"></i></p>
+                <hr>
+                <div id="class_container" class="list-group">
+                    <a href="#" id="class_select_warrior" class="list-group-item list-group-item-action" aria-current="true">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Warrior <i class="fa-duotone fa-sword"></i></h5>
+                        <small>Melee Class</small>
+                      </div>
+                      <p class="mb-1">A master of weapons and heavy armor, using mobility and strength to destroy enemies.</p>
+                      <small>And some small print.</small>
+                    </a>
+                    <a href="#" id="class_select_ranger" class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Ranger <i class="fa-duotone fa-bow-arrow"></i></h5>
+                        <small class="text-body-secondary">Ranged Class</small>
+                      </div>
+                      <p class="mb-1">A master of ranged weapons and animal companions, using traps and stealth to destroy enemies.</p>
+                      <small class="text-body-secondary">And some muted small print.</small>
+                    </a>
+                    <a href="#" id="class_select_wizard" class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Wizard <i class="fa-duotone fa-hat-wizard"></i></h5>
+                        <small class="text-body-secondary">Magic Class</small>
+                      </div>
+                      <p class="mb-1">A master of the arcane arts, using spells to destroy enemies.</p>
+                      <small class="text-body-secondary">And some muted small print.</small>
+                    </a>
+                  </div>
+            </div>
+            <div class="col">
+                <p>Stats <i class="fa-duotone fa-chart-simple"></i></p>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <p>Primary Stats</p>
+                    <li class="list-group-item">(STR) Strength: 5</li>
+                    <li class="list-group-item">(DEX) Dexterity: 5</li>
+                    <li class="list-group-item">(INT) Intelligence: 5</li>
+                    <li class="list-group-item">(VIT) Vitality: 5</li>
+                </ul>
+
+                <ul style="margin-top: 1em;" class="list-group list-group-flush">
+                    <p>Secondary Stats</p>
+                    <li class="list-group-item">Attack Speed: 1.0</li>
+                    <li class="list-group-item">Crit Chance: 0%</li>
+                    <li class="list-group-item">Life Regen: 0.0 / sec</li>
+                    <li class="list-group-item">Mana Regen: 0.0 / sec</li>
+                    <li class="list-group-item">Movement Speed: 100%</li>
+                    <li class="list-group-item">Gold Bonus: 0%</li>
+                    <li class="list-group-item">XP Bonus: 0%</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <button style="width: auto;" id="quit_to_main_menu_button" type="button" class="btn btn-primary">Quit to Main Menu</button>
+            <button style="width: auto; margin-left: auto;" id="new_character_button" type="button"
+                class="btn btn-primary">Randomize <i class="fa-regular fa-dice"></i></button>
+            <button style="width: auto ;margin-left: auto;" id="new_character_button" type="button" class="btn btn-primary">Create
+                Character <i class="fa-solid fa-plus"></i></button>
+        </div>
+    </div>
+</body>
+
+<script src="js/ButtonEvents.js" type="module"></script>
+
+<!-- Tippy.js (Tooltip Library) -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<!-- Load Tippy.js Tooltips -->
+<script src="js/tooltips.js"></script>
+
+<script>
+    var htmlElement = document.querySelector('html');
+    htmlElement.setAttribute('data-bs-theme', 'dark');
+</script>
